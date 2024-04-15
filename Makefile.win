@@ -1,0 +1,40 @@
+# Project: Parcial I 1_9
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = mainParcial_9.o Empresa.o Trabajador.o Fecha.o Persona.o
+LINKOBJ  = mainParcial_9.o Empresa.o Trabajador.o Fecha.o Persona.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = "Parcial I 1_9.exe"
+CXXFLAGS = $(CXXINCS) -ansi -fno-asm -traditional-cpp -std=c++11
+CFLAGS   = $(INCS) -ansi -fno-asm -traditional-cpp -std=c++11
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+mainParcial_9.o: mainParcial_9.cpp
+	$(CPP) -c mainParcial_9.cpp -o mainParcial_9.o $(CXXFLAGS)
+
+Empresa.o: Empresa.cpp
+	$(CPP) -c Empresa.cpp -o Empresa.o $(CXXFLAGS)
+
+Trabajador.o: Trabajador.cpp
+	$(CPP) -c Trabajador.cpp -o Trabajador.o $(CXXFLAGS)
+
+Fecha.o: Fecha.cpp
+	$(CPP) -c Fecha.cpp -o Fecha.o $(CXXFLAGS)
+
+Persona.o: Persona.cpp
+	$(CPP) -c Persona.cpp -o Persona.o $(CXXFLAGS)

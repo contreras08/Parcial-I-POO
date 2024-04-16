@@ -66,7 +66,7 @@ int main() {
                 std::cin >> id; // Solicita al usuario que ingrese el ID del trabajador
                 if (empresa.verificarExistenciaTrabajador(id)) { // Verifica si el trabajador existe
                     std::string nombreTrabajador = empresa.obtenerNombreTrabajador(id); // Obtiene el nombre del trabajador
-                    std::cout << "Ingrese el número de semana para consultar los datos de bioseguridad del trabajador " << nombreTrabajador << " (ID " << id << "): ";
+                    std::cout << "Ingrese el número de semana para consultar los datos de bioseguridad del trabajador " << nombreTrabajador << " (ID " << id << ") de la semana: ";
                     int semana;
                     std::cin >> semana; // Lee el número de semana ingresado por el usuario
                     empresa.consultarDatosBioseguridadPorSemana(id, semana); // Consulta los datos de bioseguridad por semana

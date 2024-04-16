@@ -121,16 +121,16 @@ void Empresa::mostrarTrabajadores() const {
 }
 
 void Empresa::eliminarTrabajador(int id) {
-    auto it = std::find_if(trabajadores.begin(), trabajadores.end(), [id](const Trabajador& t) { // Busca al trabajador por su ID en el vector de trabajadores
-        return t.obtenerID() == id; 
+    auto it = std::find_if(trabajadores.begin(), trabajadores.end(), [id](const Trabajador& t) {
+        return t.obtenerID() == id;
     });
 
-    if (it != trabajadores.end()) { // Si se encuentra al trabajador en el vector
-        trabajadores.erase(it); // Elimina al trabajador del vector
+    if (it != trabajadores.end()) {
+        trabajadores.erase(it);
 
         std::cout << "Trabajador con ID " << id << " eliminado exitosamente." << std::endl;
 
-        // Crea un archivo temporal para guardar las entradas de datos que no corresponden al trabajador eliminado
+        // Eliminar del archivo datos3.txt
         std::ifstream archivoDatos("datos3.txt");
         if (!archivoDatos) {
             std::cerr << "Error al abrir el archivo datos3.txt" << std::endl;
@@ -143,7 +143,7 @@ void Empresa::eliminarTrabajador(int id) {
             return;
         }
 
-        // Copia las entradas de datos que no corresponden al trabajador eliminado al archivo temporal
+        // Copiar las entradas de datos que no corresponden al trabajador eliminado al archivo temporal
         int idArchivo;
         int dia, mes, anno;
         float temperatura;
@@ -154,20 +154,44 @@ void Empresa::eliminarTrabajador(int id) {
             }
         }
 
-        // Cierra los archivos
         archivoDatos.close();
         archivoTemporal.close();
-
-        // Elimina el archivo original y renombra el archivo temporal al nombre original
         remove("datos3.txt");
         rename("temp3.txt", "datos3.txt");
+
+        // Eliminar del archivo datosSemana3.txt
+        std::ifstream archivoDatosSemana("datosSemana3.txt");
+        if (!archivoDatosSemana) {
+            std::cerr << "Error al abrir el archivo datosSemana3.txt" << std::endl;
+            return;
+        }
+        std::ofstream archivoTemporalSemana("tempSemana3.txt");
+        if (!archivoTemporalSemana) {
+            std::cerr << "Error al crear el archivo temporal" << std::endl;
+            archivoDatosSemana.close();
+            return;
+        }
+
+        // Copiar las entradas de datos semanales que no corresponden al trabajador eliminado al archivo temporal
+        int idArchivoSemana, semana;
+        while (archivoDatosSemana >> idArchivoSemana >> semana >> dia >> mes >> anno >> temperatura >> tos >> fiebre) {
+            if (idArchivoSemana != id) {
+                archivoTemporalSemana << idArchivoSemana << " " << semana << " " << dia << " " << mes << " " << anno << " " << temperatura << " " << tos << " " << fiebre << std::endl;
+            }
+        }
+
+        archivoDatosSemana.close();
+        archivoTemporalSemana.close();
+        remove("datosSemana3.txt");
+        rename("tempSemana3.txt", "datosSemana3.txt");
 
     } else {
         std::cout << "No se encontró ningún trabajador con el ID " << id << "." << std::endl;
     }
 
-    guardarTrabajadoresEnArchivo("trabajadores3.txt"); // Guarda los trabajadores en el archivo
+    guardarTrabajadoresEnArchivo("trabajadores3.txt");
 }
+
 
 void Empresa::guardarTrabajadoresEnArchivo(const std::string& nombreArchivo) const {
     std::ofstream archivo(nombreArchivo); // Abre el archivo de trabajadores para escritura

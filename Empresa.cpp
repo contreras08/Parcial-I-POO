@@ -256,7 +256,7 @@ void Empresa::consultarDatosBioseguridadPorFecha(int id, const Fecha& fecha) con
         if (idArchivo == id && dia == fecha.getDia() && mes == fecha.getMes() && anno == fecha.getAnno()) { // Comprueba si los datos coinciden con la fecha y el ID del trabajador
             encontrado = true; // Marca como encontrado
             std::cout << "=== Datos de bioseguridad para la fecha " << dia << "/" << mes << "/" << anno << " ===" << std::endl;
-            std::cout << "Temperatura: " << temperatura << std::endl; // Muestra la temperatura
+            std::cout << "Temperatura: " << temperatura << " Grados C " <<std::endl; // Muestra la temperatura
             std::cout << "Tos: " << (tos ? "Si" : "No") << std::endl; // Muestra si tiene tos
             std::cout << "Fiebre: " << (fiebre ? "Si" : "No") << std::endl; // Muestra si tiene fiebre
             break;
@@ -287,7 +287,7 @@ void Empresa::consultarDatosBioseguridadPorSemana(int id, int semana) const {
             encontrado = true; // Marca como encontrado
             std::cout << "=== Datos de bioseguridad para la semana " << semana << " ===" << std::endl;
             std::cout << std::setw(2) << std::setfill('0') << dia << "/" << std::setw(2) << std::setfill('0') << mes << "/" << anno << std::endl; // Muestra la fecha
-            std::cout << "Temperatura: " << temperatura << std::endl; // Muestra la temperatura
+            std::cout << "Temperatura: " << temperatura << " Grados C " <<std::endl; // Muestra la temperatura
             std::cout << "Tos: " << (tos ? "Si" : "No") << std::endl; // Muestra si tiene tos
             std::cout << "Fiebre: " << (fiebre ? "Si" : "No") << std::endl; // Muestra si tiene fiebre
             std::cout << std::endl; // Imprime una línea en blanco para separar los datos de diferentes días
